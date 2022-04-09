@@ -114,7 +114,6 @@ def find_currents_in_circuit(G, s, t, U):
     n = len(G)
     m = len(G.edges)
     
-    
     print(f'Number of nodes: {n}')
     print(f'Number of edges: {m}')
     print(f'Number of equations: {A.shape[0]}')

@@ -12,7 +12,7 @@ def load_compute_save_test(filename, draw=True):
     G, total_current = find_currents_in_circuit(G, s, t, U)
 
     print(f'Total current: {total_current:.2f} A')
-    print('Satisfies the kirchhoff\'s current law: ' +\
+    print('Satisfies the Kirchhoff\'s current law: ' +\
           f'{test_kirchhoffs_current_law(G, s, t, total_current)}')
 
     save_results(G, total_current, filename.removesuffix('.txt') + '_res.txt')
@@ -54,16 +54,6 @@ if __name__ == '__main__':
 
     filenames = []
 
-    erdos_renyi_n_p = [(n, p) for n in range(5, 9, 3) for p in [0.3, 0.4, 0.5]]
-    
-    U = 50
-    for n, p in erdos_renyi_n_p:
-        G = generate_erdos_renyi(n, p, 1, 10)
-        filename = f'erdos_renyi_{n}_{p}.txt'
-        save_circuit(G, 0, n-1, U, filename)
-        filenames.append(filename)
-
-
     grid_n_m = [(2, 3), 
                 (2, 5), 
                 (4, 4), 
@@ -84,6 +74,15 @@ if __name__ == '__main__':
         G = generate_small_world(n)
         filename = f'small_world_{n}.txt'
         save_circuit(G, 0, n*n-1, U, filename)
+        filenames.append(filename)
+
+    erdos_renyi_n_p = [(n, p) for n in range(15, 26, 10) for p in [0.3, 0.4, 0.5]]
+    
+    U = 50
+    for n, p in erdos_renyi_n_p:
+        G = generate_erdos_renyi(n, p, 1, 10)
+        filename = f'erdos_renyi_{n}_{p}.txt'
+        save_circuit(G, 0, n-1, U, filename)
         filenames.append(filename)
 
     for filename in filenames:
